@@ -71,42 +71,22 @@ document.addEventListener('DOMContentLoaded', () => {
         // Log to history
         addAlertToHistory(title, message, type);
 
-        // Prevent duplicate alerts of the same type filling the screen
-        const existingAlerts = document.querySelectorAll('.alert-toast');
-        if(existingAlerts.length > 3) {
-            existingAlerts[0].remove();
-        }
-
         const alertEl = document.createElement('div');
-        alertEl.className = `alert-toast alert-enter bg-card border-l-4 p-4 rounded-r-lg shadow-xl shadow-black/50 flex items-start gap-3 min-w-[300px] pointer-events-auto z-[100]`;
+        alertEl.className = `alert-toast alert-enter dashboard-card border-l-4 p-4 rounded-r-xl shadow-2xl flex items-start gap-3 min-w-[320px] pointer-events-auto z-[100] ${type === 'danger' ? 'border-danger bg-danger/10' : type === 'warning' ? 'border-warning bg-warning/10' : 'border-success bg-success/10'}`;
         
-        let iconHtml = '';
-        let borderColor = '';
-        let titleColor = '';
-
-        if(type === 'danger') {
-            borderColor = 'border-danger';
-            titleColor = 'text-danger';
-            iconHtml = '<i class="fa-solid fa-triangle-exclamation text-danger mt-0.5"></i>';
-        } else if (type === 'warning') {
-            borderColor = 'border-warning';
-            titleColor = 'text-warning';
-            iconHtml = '<i class="fa-solid fa-circle-exclamation text-warning mt-0.5"></i>';
-        } else if (type === 'success') {
-            borderColor = 'border-success';
-            titleColor = 'text-success';
-            iconHtml = '<i class="fa-solid fa-circle-check text-success mt-0.5"></i>';
-        }
-
-        alertEl.classList.add(borderColor);
+        const icons = {
+            danger: 'fa-triangle-exclamation text-danger',
+            warning: 'fa-circle-exclamation text-warning',
+            success: 'fa-circle-check text-success'
+        };
 
         alertEl.innerHTML = `
-            ${iconHtml}
+            <i class="fa-solid ${icons[type]} mt-1"></i>
             <div class="flex-grow">
-                <h4 class="font-bold text-sm ${titleColor}">${title}</h4>
-                <p class="text-xs text-slate-300 mt-1">${message}</p>
+                <h4 class="font-bold text-sm text-white uppercase tracking-wider">${title}</h4>
+                <p class="text-xs text-slate-400 mt-1">${message}</p>
             </div>
-            <button class="text-slate-500 hover:text-white transition-colors ml-2" onclick="this.parentElement.remove()">
+            <button class="text-slate-500 hover:text-white transition-colors" onclick="this.parentElement.remove()">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         `;
@@ -138,15 +118,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const now = new Date();
         const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
 
-        item.className = `history-item p-3 rounded-lg bg-slate-800/50 border border-slate-700/50 flex gap-3 items-start`;
+        item.className = `alert-card ${type === 'danger' ? 'alert-critical' : type === 'warning' ? 'alert-warning' : ''} flex gap-4 items-center stagger-slide-in`;
         item.innerHTML = `
-            <div class="w-2 h-2 rounded-full bg-${color} mt-1.5 shrink-0"></div>
+            <div class="w-10 h-10 rounded-xl bg-slate-900/50 flex items-center justify-center text-${color} border border-${color}/20 shrink-0">
+                <i class="fa-solid ${icon}"></i>
+            </div>
             <div class="flex-grow min-w-0">
-                <div class="flex justify-between items-center mb-1">
-                    <span class="text-xs font-bold text-${color} uppercase tracking-tighter">${title}</span>
+                <div class="flex justify-between items-center mb-0.5">
+                    <span class="text-[10px] font-bold text-white uppercase tracking-wider">${title}</span>
                     <span class="text-[9px] text-slate-500 font-mono">${timeStr}</span>
                 </div>
-                <p class="text-[11px] text-slate-400 truncate">${message}</p>
+                <p class="text-xs text-slate-400 truncate">${message}</p>
             </div>
         `;
 
@@ -224,43 +206,40 @@ document.addEventListener('DOMContentLoaded', () => {
             motionEl.className = 'text-success text-sm font-bold uppercase tracking-wider bg-success/10 px-3 py-1 rounded-full border border-success/20';
         }
 
-        // Color coding text based on thresholds
-        if(state.temp > THRESHOLDS.tempHigh) {
-            tempEl.classList.add('text-danger');
-            tempEl.classList.remove('text-white');
-        } else {
-            tempEl.classList.remove('text-danger');
-            tempEl.classList.add('text-white');
-        }
+        // Highlight abnormal readings (Full Row)
+        const highlightRow = (el, condition, type) => {
+            const row = el.closest('div.flex');
+            if(condition) {
+                row.classList.add(type === 'danger' ? 'bg-danger/10' : 'bg-warning/10', 'px-2', '-mx-2', 'rounded-lg', 'border', type === 'danger' ? 'border-danger/20' : 'border-warning/20');
+                el.classList.replace('text-white', type === 'danger' ? 'text-danger' : 'text-warning');
+            } else {
+                row.classList.remove('bg-danger/10', 'bg-warning/10', 'px-2', '-mx-2', 'rounded-lg', 'border', 'border-danger/20', 'border-warning/20');
+                el.classList.add('text-white');
+                el.classList.remove('text-danger', 'text-warning');
+            }
+        };
 
-        if(state.co2 > THRESHOLDS.co2High) {
-            co2El.classList.add('text-warning');
-            co2El.classList.remove('text-white');
-        } else {
-            co2El.classList.remove('text-warning');
-            co2El.classList.add('text-white');
-        }
+        highlightRow(tempEl, state.temp > THRESHOLDS.tempHigh, 'danger');
+        highlightRow(co2El, state.co2 > THRESHOLDS.co2High, 'warning');
 
         // Update Device Cards
         state.devices.forEach((status, i) => {
             const card = deviceCards[i];
             if(!card) return;
             
-            const dot = card.querySelector('.rounded-full');
+            const dot = card.querySelector('span.w-2\\.5');
             const statusText = card.querySelector('p');
             
             if(status) {
-                dot.className = 'flex h-2.5 w-2.5 rounded-full bg-success shadow-[0_0_8px_#10b981]';
-                statusText.className = 'text-xs text-success mt-1 font-semibold';
-                statusText.innerText = 'Online';
-                card.classList.remove('border-danger/30', 'bg-danger/5');
-                card.classList.add('border-slate-700');
+                dot.className = 'status-online w-2.5 h-2.5 rounded-full';
+                statusText.className = 'text-sm font-bold text-success';
+                statusText.innerText = 'ONLINE';
+                card.classList.remove('border-danger/20', 'bg-danger/5');
             } else {
-                dot.className = 'flex h-2.5 w-2.5 rounded-full bg-danger shadow-[0_0_8px_#ef4444] animate-pulse';
-                statusText.className = 'text-xs text-danger mt-1 font-semibold';
-                statusText.innerText = 'Offline';
-                card.classList.add('border-danger/30', 'bg-danger/5');
-                card.classList.remove('border-slate-700');
+                dot.className = 'status-offline w-2.5 h-2.5 rounded-full';
+                statusText.className = 'text-sm font-bold text-danger';
+                statusText.innerText = 'OFFLINE';
+                card.classList.add('border-danger/20', 'bg-danger/5');
             }
         });
 

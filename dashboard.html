@@ -83,83 +83,101 @@
         
         <!-- Device Status Panel -->
         <section class="reveal-card stagger-1">
-            <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <h2 class="section-title text-xl mb-6 flex items-center gap-3">
                 <i class="fa-solid fa-server text-primary"></i> <span data-i18n="panel.device">Device Status</span>
             </h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
                 <!-- Card 1 -->
-                <div class="bg-card rounded-xl p-4 border border-slate-700 hover:border-slate-500 transition-colors shadow-sm relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-                    <div class="flex justify-between items-start mb-2">
-                        <i class="fa-solid fa-temperature-half text-slate-400 text-lg"></i>
-                        <span class="flex h-2.5 w-2.5 rounded-full bg-success shadow-[0_0_8px_#10b981]"></span>
+                <div class="dashboard-card rounded-2xl p-5 relative overflow-hidden group">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-800/50 flex items-center justify-center text-primary/80 border border-slate-700/50">
+                            <i class="fa-solid fa-temperature-half text-lg"></i>
+                        </div>
+                        <span class="status-online w-2.5 h-2.5 rounded-full"></span>
                     </div>
-                    <h3 class="font-medium text-sm text-slate-300" data-i18n="dev.temp">Temperature Sensor</h3>
-                    <p class="text-xs text-success mt-1 font-semibold" data-i18n="status.online">Online</p>
+                    <div class="space-y-1">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="dev.temp">Temperature</h3>
+                        <p class="text-sm font-bold text-success" data-i18n="status.online">ONLINE</p>
+                    </div>
                 </div>
                 <!-- Card 2 -->
-                <div class="bg-card rounded-xl p-4 border border-slate-700 hover:border-slate-500 transition-colors shadow-sm relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-                    <div class="flex justify-between items-start mb-2">
-                        <i class="fa-solid fa-cloud text-slate-400 text-lg"></i>
-                        <span class="flex h-2.5 w-2.5 rounded-full bg-success shadow-[0_0_8px_#10b981]"></span>
+                <div class="dashboard-card rounded-2xl p-5 relative overflow-hidden group">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-800/50 flex items-center justify-center text-primary/80 border border-slate-700/50">
+                            <i class="fa-solid fa-cloud text-lg"></i>
+                        </div>
+                        <span class="status-online w-2.5 h-2.5 rounded-full"></span>
                     </div>
-                    <h3 class="font-medium text-sm text-slate-300" data-i18n="dev.gas">Gas Sensor</h3>
-                    <p class="text-xs text-success mt-1 font-semibold" data-i18n="status.online">Online</p>
+                    <div class="space-y-1">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="dev.gas">Gas Level</h3>
+                        <p class="text-sm font-bold text-success" data-i18n="status.online">ONLINE</p>
+                    </div>
                 </div>
-                <!-- Card 3 (Offline) -->
-                <div class="bg-card rounded-xl p-4 border border-danger/30 hover:border-danger/50 bg-danger/5 transition-colors shadow-sm relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-danger/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-                    <div class="flex justify-between items-start mb-2">
-                        <i class="fa-solid fa-droplet text-slate-400 text-lg"></i>
-                        <span class="flex h-2.5 w-2.5 rounded-full bg-danger shadow-[0_0_8px_#ef4444]"></span>
+                <!-- Card 3 (Offline example) -->
+                <div class="dashboard-card rounded-2xl p-5 relative overflow-hidden group border-danger/20 bg-danger/5">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-800/50 flex items-center justify-center text-danger/80 border border-slate-700/50">
+                            <i class="fa-solid fa-droplet text-lg"></i>
+                        </div>
+                        <span class="status-offline w-2.5 h-2.5 rounded-full"></span>
                     </div>
-                    <h3 class="font-medium text-sm text-slate-300" data-i18n="dev.hum">Humidity Sensor</h3>
-                    <p class="text-xs text-danger mt-1 font-semibold" data-i18n="status.offline">Offline</p>
+                    <div class="space-y-1">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="dev.hum">Humidity</h3>
+                        <p class="text-sm font-bold text-danger" data-i18n="status.offline">OFFLINE</p>
+                    </div>
                 </div>
                 <!-- Card 4 -->
-                <div class="bg-card rounded-xl p-4 border border-slate-700 hover:border-slate-500 transition-colors shadow-sm relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-                    <div class="flex justify-between items-start mb-2">
-                        <i class="fa-solid fa-person-running text-slate-400 text-lg"></i>
-                        <span class="flex h-2.5 w-2.5 rounded-full bg-success shadow-[0_0_8px_#10b981]"></span>
+                <div class="dashboard-card rounded-2xl p-5 relative overflow-hidden group">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-800/50 flex items-center justify-center text-primary/80 border border-slate-700/50">
+                            <i class="fa-solid fa-person-running text-lg"></i>
+                        </div>
+                        <span class="status-online w-2.5 h-2.5 rounded-full"></span>
                     </div>
-                    <h3 class="font-medium text-sm text-slate-300" data-i18n="dev.motion">Motion Sensor</h3>
-                    <p class="text-xs text-success mt-1 font-semibold" data-i18n="status.online">Online</p>
+                    <div class="space-y-1">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="dev.motion">Motion Sensor</h3>
+                        <p class="text-sm font-bold text-success" data-i18n="status.online">ONLINE</p>
+                    </div>
                 </div>
                 <!-- Card 5 -->
-                <div class="bg-card rounded-xl p-4 border border-slate-700 hover:border-slate-500 transition-colors shadow-sm relative overflow-hidden group">
-                    <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-                    <div class="flex justify-between items-start mb-2">
-                        <i class="fa-solid fa-gauge-high text-slate-400 text-lg"></i>
-                        <span class="flex h-2.5 w-2.5 rounded-full bg-success shadow-[0_0_8px_#10b981]"></span>
+                <div class="dashboard-card rounded-2xl p-5 relative overflow-hidden group">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-800/50 flex items-center justify-center text-primary/80 border border-slate-700/50">
+                            <i class="fa-solid fa-gauge-high text-lg"></i>
+                        </div>
+                        <span class="status-online w-2.5 h-2.5 rounded-full"></span>
                     </div>
-                    <h3 class="font-medium text-sm text-slate-300" data-i18n="dev.pres">Pressure Sensor</h3>
-                    <p class="text-xs text-success mt-1 font-semibold" data-i18n="status.online">Online</p>
+                    <div class="space-y-1">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="dev.pres">Pressure</h3>
+                        <p class="text-sm font-bold text-success" data-i18n="status.online">ONLINE</p>
+                    </div>
                 </div>
-                <!-- Card 6 — IoT Sensor Data Simulator -->
-                <a href="simulator.html" class="bg-primary/5 rounded-xl p-4 border border-primary/30 hover:border-primary hover:bg-primary/10 transition-all shadow-sm relative overflow-hidden group col-span-2 md:col-span-1 lg:col-span-1 flex flex-col cursor-pointer">
-                    <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
-                    <div class="flex justify-between items-start mb-2">
-                        <i class="fa-solid fa-microchip text-primary text-lg group-hover:animate-pulse"></i>
-                        <span class="flex h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.8)] animate-pulse"></span>
+                <!-- Card 6 -->
+                <a href="simulator.html" class="dashboard-card rounded-2xl p-5 relative overflow-hidden group bg-primary/10 border-primary/30 hover:bg-primary/20">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary border border-primary/30">
+                            <i class="fa-solid fa-microchip text-lg"></i>
+                        </div>
+                        <span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
                     </div>
-                    <h3 class="font-medium text-sm text-primary" data-i18n="btn.stimulate">IoT Stimulator</h3>
-                    <p class="text-xs text-primary/60 mt-1 font-semibold">Open Simulator →</p>
+                    <div class="space-y-1">
+                        <h3 class="text-xs font-bold text-primary uppercase tracking-wider" data-i18n="btn.stimulate">Stimulator</h3>
+                        <p class="text-sm font-bold text-primary/80">CONFIGURE →</p>
+                    </div>
                 </a>
             </div>
         </section>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Live Sensor Data Panel -->
+            <!-- Live Telemetry Panel -->
             <section class="lg:col-span-1 reveal-card stagger-2">
-                <h2 class="text-lg font-semibold text-white mb-4 flex items-center justify-between">
-                    <span class="flex items-center gap-2">
+                <h2 class="section-title text-xl mb-6 flex items-center justify-between">
+                    <span class="flex items-center gap-3">
                         <i class="fa-solid fa-tower-broadcast text-primary"></i> <span data-i18n="panel.live">Live Telemetry</span>
                     </span>
-                    <span id="last-updated" class="text-[10px] font-mono text-slate-500 bg-slate-800/50 px-2 py-0.5 rounded border border-slate-700/50">LATEST</span>
+                    <span id="last-updated" class="text-[10px] font-mono text-slate-500 bg-slate-800/50 px-3 py-1 rounded border border-slate-700/50">LATEST</span>
                 </h2>
-                <div class="bg-card rounded-xl border border-slate-700 p-5 space-y-5 shadow-lg relative overflow-hidden">
+                <div class="dashboard-card rounded-2xl p-6 space-y-6 relative overflow-hidden">
                     <div class="absolute -right-16 -top-16 bg-primary/20 w-48 h-48 rounded-full blur-3xl pointer-events-none"></div>
                     
                     <!-- Telemetry Items -->
@@ -203,24 +221,24 @@
 
             <!-- Data Visualization Section -->
             <section class="lg:col-span-2 reveal-card stagger-3">
-                <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-chart-line text-primary"></i> <span data-i18n="panel.analytics">Analytics Hub</span>
+                <h2 class="section-title text-xl mb-6 flex items-center gap-3">
+                    <i class="fa-solid fa-chart-line text-primary"></i> <span data-i18n="panel.analytics">Sensor Trends</span>
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Chart 1: Temp -->
-                    <div class="bg-card rounded-xl border border-slate-700 p-4 shadow-lg min-h-[250px] flex flex-col">
-                        <h3 class="text-sm font-medium text-slate-400 mb-2" data-i18n="chart.temp">Temperature Trend (°C)</h3>
-                        <div class="flex-grow relative w-full"><canvas id="tempChart"></canvas></div>
+                    <div class="dashboard-card rounded-2xl p-6 shadow-lg h-[300px] flex flex-col">
+                        <h3 class="text-sm font-bold text-slate-400 mb-4 flex items-center gap-2" data-i18n="chart.temp"><i class="fa-solid fa-temperature-full text-xs"></i> Temperature Trend (°C)</h3>
+                        <div class="flex-grow min-h-0 relative w-full"><canvas id="tempChart"></canvas></div>
                     </div>
                     <!-- Chart 2: Humidity -->
-                    <div class="bg-card rounded-xl border border-slate-700 p-4 shadow-lg min-h-[250px] flex flex-col">
-                        <h3 class="text-sm font-medium text-slate-400 mb-2" data-i18n="chart.hum">Humidity Levels (%)</h3>
-                        <div class="flex-grow relative w-full"><canvas id="humChart"></canvas></div>
+                    <div class="dashboard-card rounded-2xl p-6 shadow-lg h-[300px] flex flex-col">
+                        <h3 class="text-sm font-bold text-slate-400 mb-4 flex items-center gap-2" data-i18n="chart.hum"><i class="fa-solid fa-droplet text-xs"></i> Humidity Levels (%)</h3>
+                        <div class="flex-grow min-h-0 relative w-full"><canvas id="humChart"></canvas></div>
                     </div>
                     <!-- Chart 3: CO2 -->
-                    <div class="bg-card rounded-xl border border-slate-700 p-4 shadow-lg min-h-[250px] md:col-span-2 flex flex-col">
-                        <h3 class="text-sm font-medium text-slate-400 mb-2" data-i18n="chart.co2">CO2 Concentration Forecast (ppm)</h3>
-                        <div class="flex-grow relative w-full h-48"><canvas id="co2Chart"></canvas></div>
+                    <div class="dashboard-card rounded-2xl p-4 shadow-lg h-[320px] md:col-span-2 flex flex-col">
+                        <h3 class="text-sm font-bold text-slate-400 mb-4 flex items-center gap-2" data-i18n="chart.co2"><i class="fa-solid fa-wind text-xs"></i> CO2 Concentration Forecast (ppm)</h3>
+                        <div class="flex-grow min-h-0 relative w-full"><canvas id="co2Chart"></canvas></div>
                     </div>
                 </div>
             </section>
@@ -229,10 +247,10 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Alert History Section -->
             <section class="lg:col-span-1 reveal-card stagger-4">
-                <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                <h2 class="section-title text-xl mb-6 flex items-center gap-3">
                     <i class="fa-solid fa-clock-rotate-left text-primary"></i> <span data-i18n="panel.history">Alert History</span>
                 </h2>
-                <div id="alert-history" class="bg-card rounded-xl border border-slate-700 p-4 h-[300px] overflow-y-auto space-y-3 custom-scrollbar">
+                <div id="alert-history" class="dashboard-card rounded-2xl p-6 h-[400px] overflow-y-auto space-y-4 custom-scrollbar">
                     <div class="h-full flex flex-col items-center justify-center text-slate-500 space-y-2 opacity-50">
                         <i class="fa-solid fa-bell-slash text-3xl"></i>
                         <p class="text-xs">No Recent Alerts</p>
@@ -242,8 +260,8 @@
 
         <!-- Industry Risk Monitoring Table -->
         <section class="reveal-card stagger-5">
-            <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-shield-virus text-primary"></i> <span data-i18n="panel.risk">Risk Monitoring Policies</span>
+            <h2 class="section-title text-xl mb-6 flex items-center gap-3">
+                <i class="fa-solid fa-shield-virus text-primary"></i> <span data-i18n="panel.risk">Policy Engine</span>
             </h2>
             <div class="bg-card rounded-xl border border-slate-700 shadow-lg overflow-x-auto">
                 <table class="w-full text-left border-collapse min-w-[700px]">

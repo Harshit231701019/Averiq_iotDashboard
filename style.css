@@ -1,100 +1,146 @@
-/* Base custom styles to ensure pure aesthetics */
+/* Modern Industrial UI Design System */
+:root {
+    --bg-dark: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --primary-glow: rgba(59, 130, 246, 0.5);
+    --success-glow: rgba(16, 185, 129, 0.5);
+    --danger-glow: rgba(239, 68, 68, 0.5);
+    --warning-glow: rgba(245, 158, 11, 0.5);
+}
+
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-dark);
 }
 
 select {
-    background-image: none; /* override default arrow */
+    background-image: none;
 }
 
 select:focus {
     outline: none;
 }
 
-/* Custom Scrollbar for a premium look */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a; 
+    background: #0f172a; 
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155; 
-  border-radius: 4px;
+    background: #334155; 
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569; 
+    background: #475569; 
 }
 
-/* Animations for Alerts */
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
 }
 
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
 }
 
-.alert-enter {
-  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Modern Industrial Dashboard Components */
+.dashboard-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.alert-exit {
-  animation: fadeOut 0.3s ease-in forwards;
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
 }
 
-/* Pulse animation utility for the motion sensor alert */
-@keyframes softPulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.7; }
-}
-.motion-alert {
-    animation: softPulse 1.5s infinite;
+/* Glowing Status Indicators */
+@keyframes statusGlowSuccess {
+    0%, 100% { box-shadow: 0 0 5px var(--success-glow); opacity: 1; }
+    50% { box-shadow: 0 0 15px var(--success-glow); opacity: 0.8; }
 }
 
-
-/* Added styles for onboarding flow enhancements */
-
-@keyframes shimmer {
-    100% {
-        transform: translateX(100%);
-    }
+@keyframes statusGlowDanger {
+    0%, 100% { box-shadow: 0 0 5px var(--danger-glow); opacity: 1; }
+    50% { box-shadow: 0 0 15px var(--danger-glow); opacity: 0.8; }
 }
 
+.status-online {
+    background-color: #10b981;
+    animation: statusGlowSuccess 2s infinite ease-in-out;
+}
+
+.status-offline {
+    background-color: #ef4444;
+    animation: statusGlowDanger 2s infinite ease-in-out;
+}
+
+/* Section Headings */
+.section-title {
+    position: relative;
+    padding-left: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    color: white;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 70%;
+    background: #3b82f6;
+    border-radius: 2px;
+}
+
+/* Alert History Styles */
+.alert-card {
+    border-left: 4px solid transparent;
+    transition: transform 0.2s ease;
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.alert-card:hover {
+    transform: scale(1.01);
+}
+
+.alert-critical {
+    border-left-color: #ef4444;
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.alert-warning {
+    border-left-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.05);
+}
+
+/* Animations from previous flow */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-fade-in-up {
     animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Staggered Entry Animations */
 .stagger-1 { animation-delay: 0.1s; }
 .stagger-2 { animation-delay: 0.2s; }
 .stagger-3 { animation-delay: 0.3s; }
@@ -108,156 +154,37 @@ select:focus {
 }
 
 @keyframes revealCard {
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Premium Hover Effects */
-.industry-card {
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+/* Push Animations */
+@keyframes pushIn {
+    from { transform: translateX(100px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }
 
-.industry-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.1);
+@keyframes pushOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(-100px); opacity: 0; }
 }
 
-.industry-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.3), transparent, rgba(59, 130, 246, 0.1));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.industry-card:hover::after {
-    opacity: 1;
-}
-
-/* Neon text pulse effect for landing page */
-@keyframes neonPulse {
-    0%, 100% {
-        text-shadow: 0 0 10px rgba(59,130,246,0.5), 0 0 20px rgba(59,130,246,0.3);
-    }
-    50% {
-        text-shadow: 0 0 15px rgba(59,130,246,0.8), 0 0 30px rgba(59,130,246,0.5);
-    }
-}
+.animate-push-in { animation: pushIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-push-out { animation: pushOut 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
 .neon-text {
     animation: neonPulse 2s infinite ease-in-out;
 }
 
-/* IoT Simulator Modal — Scale-in animation */
-@keyframes simulatorIn {
-    from {
-        opacity: 0;
-        transform: scale(0.93) translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
+@keyframes neonPulse {
+    0%, 100% { text-shadow: 0 0 10px rgba(59,130,246,0.5); }
+    50% { text-shadow: 0 0 20px rgba(59,130,246,0.8); }
 }
 
-.animate-simulator-in {
-    animation: simulatorIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Range slider track styling */
+/* Simulator Styles */
 .sim-slider {
     background: linear-gradient(to right, #3b82f6 0%, #3b82f6 var(--val, 50%), #334155 var(--val, 50%), #334155 100%);
 }
 
-.sim-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #3b82f6;
-    cursor: pointer;
-    box-shadow: 0 0 6px rgba(59,130,246,0.6);
-    transition: box-shadow 0.2s;
-}
-
-.sim-slider::-webkit-slider-thumb:hover {
-    box-shadow: 0 0 12px rgba(59,130,246,0.9);
-}
-
-.sim-slider::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #3b82f6;
-    cursor: pointer;
-    border: none;
-    box-shadow: 0 0 6px rgba(59,130,246,0.6);
-}
-
-/* Custom Scrollbar for Alert History */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 10px;
-}
-
-/* Alert History Item Animation */
-.history-item {
-    animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-10px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-/* Push Animations for Luxury Transitions */
-@keyframes pushIn {
-  from {
-    transform: translateX(100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes pushOut {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-}
-
-.animate-push-in {
-    animation: pushIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-push-out {
-    animation: pushOut 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.animate-simulator-in {
+    animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

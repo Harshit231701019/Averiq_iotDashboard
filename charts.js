@@ -1,8 +1,8 @@
 // Setup Chart.js defaults for dark theme
-Chart.defaults.color = '#94a3b8'; // text-slate-400
-Chart.defaults.font.family = 'inherit';
-Chart.defaults.scale.grid.color = 'rgba(51, 65, 85, 0.3)'; // border-slate-700 slightly transparent
-Chart.defaults.scale.grid.borderColor = 'rgba(51, 65, 85, 0.5)';
+Chart.defaults.color = 'rgba(148, 163, 184, 0.7)'; // text-slate-400
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.scale.grid.color = 'rgba(51, 65, 85, 0.2)'; 
+Chart.defaults.scale.grid.borderColor = 'rgba(51, 65, 85, 0.3)';
 
 // Determine base starting state for charts based on selected industry
 const currentIndustry = localStorage.getItem('iot_industry') || 'Manufacturing';
@@ -48,13 +48,24 @@ document.addEventListener('DOMContentLoaded', () => {
             datasets: [{
                 label: 'Temperature (°C)',
                 data: tempData,
-                borderColor: '#ef4444', 
-                backgroundColor: 'rgba(239, 68, 68, 0.15)',
-                borderWidth: 2,
-                tension: 0.4, 
+                borderColor: '#60a5fa', 
+                backgroundColor: (context) => {
+                    const chart = context.chart;
+                    const {ctx, chartArea} = chart;
+                    if (!chartArea) return null;
+                    const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+                    gradient.addColorStop(0, 'rgba(96, 165, 250, 0.3)');
+                    gradient.addColorStop(1, 'rgba(96, 165, 250, 0)');
+                    return gradient;
+                },
+                borderWidth: 3,
+                tension: 0.5, 
                 fill: true,
                 pointRadius: 0,
-                pointHoverRadius: 4
+                pointHoverRadius: 6,
+                pointBackgroundColor: '#60a5fa',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
             }]
         },
         options: {
@@ -93,8 +104,16 @@ document.addEventListener('DOMContentLoaded', () => {
             datasets: [{
                 label: 'Humidity (%)',
                 data: humData,
-                backgroundColor: '#3b82f6', 
-                borderRadius: 4,
+                backgroundColor: (context) => {
+                    const chart = context.chart;
+                    const {ctx, chartArea} = chart;
+                    if (!chartArea) return null;
+                    const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+                    gradient.addColorStop(0, '#3b82f6');
+                    gradient.addColorStop(1, 'rgba(59, 130, 246, 0.4)');
+                    return gradient;
+                },
+                borderRadius: 6,
                 hoverBackgroundColor: '#60a5fa'
             }]
         },
@@ -129,13 +148,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 label: 'CO2 Level (ppm)',
                 data: co2Data,
                 borderColor: '#10b981', 
-                backgroundColor: 'rgba(16, 185, 129, 0.15)',
-                borderWidth: 2,
-                tension: 0.2, // slight curve
+                backgroundColor: (context) => {
+                    const chart = context.chart;
+                    const {ctx, chartArea} = chart;
+                    if (!chartArea) return null;
+                    const gradient = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+                    gradient.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
+                    gradient.addColorStop(1, 'rgba(16, 185, 129, 0)');
+                    return gradient;
+                },
+                borderWidth: 3,
+                tension: 0.4, 
                 fill: true,
+                pointRadius: 0,
+                pointHoverRadius: 6,
                 pointBackgroundColor: '#10b981',
-                pointRadius: 2,
-                pointHoverRadius: 5
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
             }]
         },
         options: {
