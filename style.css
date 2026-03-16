@@ -1,0 +1,263 @@
+/* Base custom styles to ensure pure aesthetics */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+select {
+    background-image: none; /* override default arrow */
+}
+
+select:focus {
+    outline: none;
+}
+
+/* Custom Scrollbar for a premium look */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155; 
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569; 
+}
+
+/* Animations for Alerts */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.alert-enter {
+  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.alert-exit {
+  animation: fadeOut 0.3s ease-in forwards;
+}
+
+/* Pulse animation utility for the motion sensor alert */
+@keyframes softPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+.motion-alert {
+    animation: softPulse 1.5s infinite;
+}
+
+
+/* Added styles for onboarding flow enhancements */
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Staggered Entry Animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+.reveal-card {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    animation: revealCard 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes revealCard {
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Premium Hover Effects */
+.industry-card {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.industry-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.1);
+}
+
+.industry-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(to bottom right, rgba(59, 130, 246, 0.3), transparent, rgba(59, 130, 246, 0.1));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.industry-card:hover::after {
+    opacity: 1;
+}
+
+/* Neon text pulse effect for landing page */
+@keyframes neonPulse {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(59,130,246,0.5), 0 0 20px rgba(59,130,246,0.3);
+    }
+    50% {
+        text-shadow: 0 0 15px rgba(59,130,246,0.8), 0 0 30px rgba(59,130,246,0.5);
+    }
+}
+
+.neon-text {
+    animation: neonPulse 2s infinite ease-in-out;
+}
+
+/* IoT Simulator Modal — Scale-in animation */
+@keyframes simulatorIn {
+    from {
+        opacity: 0;
+        transform: scale(0.93) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.animate-simulator-in {
+    animation: simulatorIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Range slider track styling */
+.sim-slider {
+    background: linear-gradient(to right, #3b82f6 0%, #3b82f6 var(--val, 50%), #334155 var(--val, 50%), #334155 100%);
+}
+
+.sim-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(59,130,246,0.6);
+    transition: box-shadow 0.2s;
+}
+
+.sim-slider::-webkit-slider-thumb:hover {
+    box-shadow: 0 0 12px rgba(59,130,246,0.9);
+}
+
+.sim-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #3b82f6;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 6px rgba(59,130,246,0.6);
+}
+
+/* Custom Scrollbar for Alert History */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
+}
+
+/* Alert History Item Animation */
+.history-item {
+    animation: slideInLeft 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Push Animations for Luxury Transitions */
+@keyframes pushIn {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pushOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+}
+
+.animate-push-in {
+    animation: pushIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-push-out {
+    animation: pushOut 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
